@@ -49,3 +49,5 @@
 ;; ...Or *all* packages (NOT RECOMMENDED; will likely break things)
 ;(unpin! t)
 (package! rjsx-mode)
+(package! markdown-mode)
+(package! auto-complete)
