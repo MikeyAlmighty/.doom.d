@@ -51,3 +51,4 @@
 (package! rjsx-mode)
 (package! markdown-mode)
 (package! auto-complete)
+(package! org-auto-tangle)
