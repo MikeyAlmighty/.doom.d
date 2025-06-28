@@ -19,8 +19,10 @@
 ;;
 ;; They all accept either a font-spec, font string ("Input Mono-12"), or xlfd
 ;; font string. You generally only need these two:
-(setq doom-font (font-spec :family "monospace" :size 20 :weight 'semi-light)
-      doom-variable-pitch-font (font-spec :family "sans" :size 21))
+;; (setq doom-font (font-spec :family "monospace" :size 16 :weight 'semi-light)
+;;       doom-variable-pitch-font (font-spec :family "sans" :size 17))
+
+(setq doom-font (font-spec :family "FiraCode Nerd Font Mono" :size 14))
 
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
@@ -29,12 +31,11 @@
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
-(setq org-directory "~/org/")
+(setq org-directory "~/dev/sarah")
 
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
 (setq display-line-numbers-type 'relative)
-
 
 ;; Here are some additional functions/macros that could help you configure Doom:
 ;;
@@ -53,10 +54,56 @@
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
 
+(setq fancy-splash-image "~/.config/doom/emacs-dashboard.png")
+
 (setq org-roam-directory "~/Dev/sarah")
 (use-package! org-auto-tangle
   :defer t
   :hook (org-mode . org-auto-tangle-mode)
   :config
   (setq org-auto-tangle-default t)
-)
+  )
+
+(map! :leader
+      (:prefix "o"
+       :desc "Toggle vterm" "e" #'+vterm/toggle))
+
+(map! :leader
+      (:prefix "o"
+               "t" nil))  ;; unbind SPC o t
+
+(use-package! lsp-ui
+  :init
+  (setq lsp-ui-doc-enable t
+        lsp-ui-doc-show-with-cursor t
+        lsp-ui-doc-show-with-mouse t
+        lsp-ui-doc-position 'at-point)) ;; or 'top if you want it floating
+
+;; Ensure .tsx uses the correct mode
+(add-to-list 'auto-mode-alist '("\\.tsx\\'" . typescript-tsx-mode))
+
+;; Enable LSP and LSP UI in TSX files
+(add-hook 'typescript-tsx-mode-hook #'lsp!)
+(add-hook 'lsp-mode-hook #'lsp-ui-mode)
+
+;; Optional: Tweak lsp-ui display
+(after! lsp-ui
+  (setq lsp-ui-doc-enable t
+        lsp-ui-doc-show-with-cursor t
+        lsp-ui-doc-position 'at-point
+        lsp-ui-sideline-enable t))
+
+(defun run-jest-current-file ()
+  "Run Jest on the current file."
+  (interactive)
+  (let ((test-file (buffer-file-name)))
+    (compile (format "npx jest %s" test-file))))
+
+(map! :leader
+      (:prefix ("j" . "jest")
+       :desc "Run current test file" "r" #'run-jest-current-file))
+
+(map! :leader
+      (:prefix "t"
+       :desc "Next tab" "n" #'+tabs/next-or-goto
+       :desc "Previous tab" "p" #'+tabs/previous-or-goto))
