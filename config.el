@@ -92,17 +92,3 @@
         lsp-ui-doc-show-with-cursor t
         lsp-ui-doc-position 'at-point
         lsp-ui-sideline-enable t))
-
-(defun run-jest-current-file ()
-  "Run Jest on the current file."
-  (interactive)
-  (let ((test-file (buffer-file-name)))
-    (compile (format "npx jest %s" test-file))))
-
-(map! :leader
-      (:prefix ("j" . "jest")
-       :desc "Run current test file" "r" #'run-jest-current-file))
-
-(map! :n
-      "C-<tab>"       #'+tabs:next-or-goto
-      "C-<iso-lefttab>" #'+tabs:previous-or-goto)
