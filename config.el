@@ -103,7 +103,6 @@
       (:prefix ("j" . "jest")
        :desc "Run current test file" "r" #'run-jest-current-file))
 
-(map! :leader
-      (:prefix "t"
-       :desc "Next tab" "n" #'+tabs/next-or-goto
-       :desc "Previous tab" "p" #'+tabs/previous-or-goto))
+(map! :n
+      "C-<tab>"       #'+tabs:next-or-goto
+      "C-<iso-lefttab>" #'+tabs:previous-or-goto)
