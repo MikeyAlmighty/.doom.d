@@ -99,3 +99,13 @@
 
  ;; Ctrl + Shift + Tab (comes through as C-<iso-lefttab>)
  ("<C-iso-lefttab>" #'+tabs:previous-or-goto))
+
+(map! :leader
+      :desc "LSP Peek References"
+      "g D" #'lsp-ui-peek-find-references)
+
+(setq lsp-ui-peek-list-width 50
+      lsp-ui-peek-peek-height 20)
+
+(after! evil
+  (define-key evil-normal-state-map (kbd "g D") #'lsp-ui-peek-find-references))

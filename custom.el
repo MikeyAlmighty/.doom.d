@@ -36,7 +36,7 @@
  '(jdee-db-requested-breakpoint-face-colors (cons "#1D1D1D" "#86B187"))
  '(jdee-db-spec-breakpoint-face-colors (cons "#1D1D1D" "#433F4f"))
  '(objed-cursor-color "#E2434C")
- '(package-selected-packages '(chatgpt-shell prettier-js rjsx-mode))
+ '(package-selected-packages '(chatgpt-shell consult-lsp prettier-js rjsx-mode))
  '(pdf-view-midnight-colors (cons "#F6F3E8" "#171717"))
  '(rustic-ansi-faces
    ["#171717" "#E2434C" "#86B187" "#E0D063" "#8AC6F2" "#E18Cbb" "cyan" "#F6F3E8"])
