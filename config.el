@@ -109,3 +109,7 @@
 
 (after! evil
   (define-key evil-normal-state-map (kbd "g D") #'lsp-ui-peek-find-references))
+
+(setq lsp-ui-peek-list-width 90
+      lsp-ui-peek-peek-height 40
+      lsp-ui-peek-peek-width 100)
