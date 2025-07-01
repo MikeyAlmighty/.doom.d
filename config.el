@@ -92,3 +92,10 @@
         lsp-ui-doc-show-with-cursor t
         lsp-ui-doc-position 'at-point
         lsp-ui-sideline-enable t))
+
+(map!
+ ;; Super + Tab
+ ("<s-tab>" #'+tabs:next-or-goto)
+
+ ;; Ctrl + Shift + Tab (comes through as C-<iso-lefttab>)
+ ("<C-iso-lefttab>" #'+tabs:previous-or-goto))
