@@ -113,3 +113,4 @@
 (setq lsp-ui-peek-list-width 90
       lsp-ui-peek-peek-height 40
       lsp-ui-peek-peek-width 100)
+
