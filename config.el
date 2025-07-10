@@ -32,6 +32,8 @@
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
 (setq org-directory "~/dev/sarah")
+(setq org-work-directory "~/Dev/srx")
+
 
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
@@ -56,7 +58,9 @@
 
 (setq fancy-splash-image "~/.config/doom/emacs-dashboard.png")
 
-(setq org-roam-directory "~/Dev/sarah")
+(setq org-roam-personal-directory "~/Dev/sarah")
+(setq org-roam-work-directory "~/Dev/srx")
+
 (use-package! org-auto-tangle
   :defer t
   :hook (org-mode . org-auto-tangle-mode)
@@ -114,3 +118,23 @@
       lsp-ui-peek-peek-height 40
       lsp-ui-peek-peek-width 100)
 
+
+(defun my/org-roam-switch-to-personal ()
+  "Switch to personal Org-roam directory."
+  (interactive)
+  (setq org-roam-directory org-roam-personal-directory)
+  (org-roam-db-sync)
+  (message "Switched to sarah Org-roam directory."))
+
+(defun my/org-roam-switch-to-work ()
+  "Switch to work Org-roam directory."
+  (interactive)
+  (setq org-roam-directory org-roam-work-directory)
+  (org-roam-db-sync)
+  (message "Switched to srx Org-roam directory."))
+
+;; Optional: Create keybindings under SPC n r (org-roam prefix)
+(map! :leader
+      :prefix "n r"
+      :desc "Switch to sarah" "p" #'my/org-roam-switch-to-personal
+      :desc "Switch to srx"     "w" #'my/org-roam-switch-to-work)
